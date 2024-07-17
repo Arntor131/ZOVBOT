@@ -1,0 +1,20 @@
+{
+  "name": "zovbot",
+  "version": "1.0.0",
+  "description": "Simple discord bot that implements GOIDA protocol",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "A_131",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "pg": "^8.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ARNTOR131/ZOVBOT"
+  }
+}
