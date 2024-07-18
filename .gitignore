@@ -1,0 +1,5 @@
+.env
+src/database.js
+src/index-old.js
+src/register-commands-old.js
+node_modules
