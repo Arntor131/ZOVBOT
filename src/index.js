@@ -16,6 +16,14 @@ const client = new Client({
     ]
 });
 
+// const postgresClient = new PSQL({
+//     user: process.env.PG_USER,
+//     password : process.env.PG_PASSWD,
+//     host: process.env.PG_HOST,
+//     port: process.env.PG_PORT,
+//     database: process.env.PG_DATABASE,
+// });
+
 eventHandler(client);
 
 client.login(process.env.TOKEN);
