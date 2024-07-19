@@ -1,5 +1,3 @@
-const { ApplicationCommandOptionType, PermissionFlagsBits } = require('discord.js');
-
 module.exports = {
     name: 'kit-info',
     description: 'Информация про китовый сервер',
