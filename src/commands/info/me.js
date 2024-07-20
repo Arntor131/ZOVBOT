@@ -1,9 +1,30 @@
+const { Client:PgClient} = require('pg');
+
+const pgClient = new PgClient({
+    user: process.env.PG_USER,
+    password : process.env.PG_PASSWD,
+    host: process.env.PG_HOST,
+    port: process.env.PG_PORT,
+    database: process.env.PG_DATABASE,
+});
+
+pgClient
+    .connect()
+    .then(() => {
+        console.log(`Bot connected to database`);
+    })
+    .catch((err) => {
+        console.error('B.R.U.H', err);
+    });
+
 module.exports = {
     name: 'me',
     description: 'Информация о вашей уч. записи в системе Paskhalko',
-    deleted: true,
     
     callback: (client, interaction) => {
+
+        
+
         let replyMessage = '';
         
         pgClient.query(`SELECT * FROM users WHERE discordid = ${interaction.user.id};`, (err, result) => {

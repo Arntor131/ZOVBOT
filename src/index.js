@@ -16,24 +16,19 @@ const client = new Client({
     ]
 });
 
-const pgClient = new PSQL({
-    user: process.env.PG_USER,
-    password : process.env.PG_PASSWD,
-    host: process.env.PG_HOST,
-    port: process.env.PG_PORT,
-    database: process.env.PG_DATABASE,
-});
 
-pgClient
-    .connect()
-    .then(() => {
-        console.log(`Bot connected to database`);
-        eventHandler(client);
-    })
-    .catch((err) => {
-        console.error('B.R.U.H', err);
-    });
 
+// pgClient
+//     .connect()
+//     .then(() => {
+//         console.log(`Bot connected to database`);
+        
+//     })
+//     .catch((err) => {
+//         console.error('B.R.U.H', err);
+//     });
+
+    eventHandler(client);
 
 
 client.login(process.env.TOKEN);
