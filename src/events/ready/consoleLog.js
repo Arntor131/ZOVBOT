@@ -5,6 +5,9 @@ module.exports = async (client) => {
 
     await client.channels.fetch(process.env.TEST_CHANNEL_ID)
     .then(channel => {
-        channel.send('ZOVBOT is online');
+        channel.send({
+            content: 'ZOVBOT is online!',
+            files: ['src/media/img/goool.png'],
+        });
     });
 };
