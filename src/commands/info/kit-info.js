@@ -9,7 +9,6 @@ module.exports = {
         fetch('https://mcapi.us/server/status?ip='+kitServerIp+'&port='+kitServerPort)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
             
                 let replyMessage = `Сейчас на сервере находится **${data.players.now}** **из** **${data.players.max}** игроков \n`;
                 for(let i = 0; i < data.players.now; i++) {

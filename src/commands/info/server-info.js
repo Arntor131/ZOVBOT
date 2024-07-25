@@ -37,7 +37,6 @@ module.exports = {
                 console.log('unable to get players');
             } else {
                 console.log('getting players');
-                console.log(data.players.sample);
                 for(let i = 0; i < data.players.now; i++) {
                     let name = data.players.sample[i].name.replace("_", "\\_");
                     replyMessage += `> **•**  ${name} \n`;

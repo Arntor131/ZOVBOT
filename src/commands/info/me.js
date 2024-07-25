@@ -31,9 +31,6 @@ module.exports = {
             if(err) {
                 console.error('BRUH 2', err);
             } else {
-                console.log('Query result:', typeof(result.rows[0]));
-                console.log(result.rows[0]);
-
                 if(result.rows.length === 0) {
                     console.log('Undocumented user issued "psk-me" command');
                     replyMessage = ('Не удалось получить информацию о вашей учетной записи, т.к. записи для вашего ID не существует.');
