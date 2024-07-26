@@ -9,15 +9,26 @@ module.exports = {
         fetch('https://mcapi.us/server/status?ip='+kitServerIp+'&port='+kitServerPort)
             .then(response => response.json())
             .then(data => {
-            
-                let replyMessage = `Сейчас на сервере находится **${data.players.now}** **из** **${data.players.max}** игроков \n`;
-                for(let i = 0; i < data.players.now; i++) {
-                    let name = data.players.sample[i].name.replace("_", "\\_");
-                    replyMessage += `> **•**  ${name} \n`;
+                
+                let replyEmbed = {
+                    color: 0x26edb5,
+                    title: 'Китовый сервер',
+                    description: `Онлайн: **${data.players.now} из ${data.players.max}** чел.`,                    
+                };
+
+                if(data.players.now != 0) {
+                    let playerListField = '';     
+
+                    for(i = 0; i < data.players.now; i++) {
+                        let name = data.players.sample[i].name.replace("_", "\\_");
+                        playerListField += `> **•**  ${name} \n`;                    
+                    }
+
+                    playerListField.replace('_', '\\_');
+                    Object.assign(replyEmbed, {fields: [{name: 'Список игроков:', value: playerListField}]});
                 }
 
-                replyMessage.replace('_', '\\_');
-                interaction.reply(replyMessage);
+                interaction.reply({embeds: [replyEmbed]});
         });       
     }
 }
