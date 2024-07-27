@@ -1,4 +1,4 @@
-const { Attachment, EmbedBuilder, AttachmentBuilder } = require('discord.js');
+const { Attachment, EmbedBuilder, AttachmentBuilder, ActivityType } = require('discord.js');
 const { description } = require('../../commands/moderation/ban');
 
 const file = new AttachmentBuilder('src/assets/img/zov.png');
@@ -28,13 +28,13 @@ const onReadyEmbed = {
 module.exports = async (client) => {
     console.log(`${client.user.tag} is online`);
 
+    client.user.setActivity({
+        name: "Under development!",
+        type: ActivityType.Custom,
+    });
+
     await client.channels.fetch(process.env.TEST_CHANNEL_ID)
     .then(channel => {
-        // channel.send({
-        //     content: 'ZOVBOT is online!',
-        //     files: ['src/assets/img/goool.png'],
-        // });
-
         channel.send({embeds: [onReadyEmbed], files: [file]});
     });
 };
