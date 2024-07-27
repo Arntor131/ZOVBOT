@@ -1,5 +1,8 @@
 const { Attachment, EmbedBuilder, AttachmentBuilder } = require('discord.js');
 
+const zovImg = new AttachmentBuilder('src/assets/img/zov.png');
+const pskImg = new AttachmentBuilder('src/assets/img/psk.png');
+
 replyEmbed = {
     color: 0xff6c6c,
     title: 'ZOVBOT',
@@ -13,6 +16,15 @@ replyEmbed = {
     thumbnail: {
         url: 'attachment://zov.png',
     },
+    fields: [
+        {
+            name: 'One bot to rule them all!',
+            value: '**ZOVBOT** - бот, предназначенный для использования на сервере "[**Paskhalko**](https://discord.gg/rsKKzhz76U)" в целях администрирования сервера и обеспечения взаимодействия игроков с системой Paskhalko.\n\n  На данный момент бот находится в состоянии активной разработки и может работать нестабильно'
+        },
+    ],
+    image: {
+        url: 'attachment://psk.png'
+    }
 };
 
 module.exports = {
@@ -20,6 +32,6 @@ module.exports = {
     description: 'Общая информация о приложении ZOVBOT',
     
     callback: (client, interaction) => {
-        interaction.reply({embeds: [replyEmbed]});
+        interaction.reply({embeds: [replyEmbed], files: [zovImg, pskImg]});
     }
 }
