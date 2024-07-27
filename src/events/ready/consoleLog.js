@@ -18,8 +18,8 @@ const onReadyEmbed = {
     },
     fields: [
         {
-            name: 'Aboba',
-            value: 'aboba-boba'
+            name: 'Абоба',
+            value: '[Пасхалко](https://discord.gg/rsKKzhz76U)'
         },
     ],
 
