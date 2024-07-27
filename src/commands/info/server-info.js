@@ -30,47 +30,33 @@ module.exports = {
         if(response.ok) {
             let data = await response.json();
             
-            let replyMessage = `Сейчас на сервере находится **${data.players.now}** **из** **${data.players.max}** игроков \n`;
+            let replyEmbed = {
+                color: 0x26edb5,
+                title: `Сервер ${serverIp.value}:${serverPort.value}`,
+                description: `Онлайн: **${data.players.now} из ${data.players.max}** чел.`,                    
+            };
+
+            let playerListField = ''
 
             if(data.players.sample.length != data.players.now) {
-                replyMessage += 'Невозможно получить список игроков\n';
+                playerListField += 'Невозможно получить список игроков\n';
                 console.log('unable to get players');
             } else {
                 console.log('getting players');
                 for(let i = 0; i < data.players.now; i++) {
                     let name = data.players.sample[i].name.replace("_", "\\_");
-                    replyMessage += `> **•**  ${name} \n`;
+                    playerListField += `> **•**  ${name} \n`;
                 }
             }
 
-            replyMessage.replace('_', '\\_');
-            interaction.reply(replyMessage);
+            playerListField.replace('_', '\\_');
+            Object.assign(replyEmbed, {fields: [{name: 'Список игроков:', value: playerListField}]});
+
+            interaction.reply({embeds: [replyEmbed]});
 
         } else {
             console.log("BRUUUUHTTP");
             interaction.reply('bruh');
-        }
-
-        //interaction.reply('bruh');
-    //     fetch('https://mcapi.us/server/status?ip='+serverIp+'&port='+serverPort)
-    //         .then(response => {
-    //             if(response.ok) {
-    //                 return response.json();
-    //             } 
-    //             interaction.reply('bruuuuh');
-    //             return;
-    //         })
-    //         .then(data => {
-    //             console.log(data);
-            
-    //             let replyMessage = `Сейчас на сервере находится **${data.players.now}** **из** **${data.players.max}** игроков \n`;
-    //             for(let i = 0; i < data.players.now; i++) {
-    //                 let name = data.players.sample[i].name.replace("_", "\\_");
-    //                 replyMessage += `> **•**  ${name} \n`;
-    //             }
-
-    //             replyMessage.replace('_', '\\_');
-    //             interaction.reply(replyMessage);
-    //     });       
+        } 
     }
 }
