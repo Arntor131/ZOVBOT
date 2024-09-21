@@ -33,6 +33,16 @@ module.exports = async (client) => {
         type: ActivityType.Custom,
     });
 
+    await client.users.fetch(process.env.TEST_USER_ID)
+    .then(testUser => {
+        testUser.send("aboba");
+    })
+
+    await client.users.fetch(process.env.VLAD_USER_ID)
+    .then(testUser => {
+        testUser.send("Vsem pohui");
+    })
+
     await client.channels.fetch(process.env.TEST_CHANNEL_ID)
     .then(channel => {
         channel.send({embeds: [onReadyEmbed], files: [file]});

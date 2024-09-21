@@ -1,5 +1,4 @@
 const { ApplicationCommandOptionType } = require("discord.js");
-const { description } = require("../moderation/ban");
 
 module.exports = {
     name: 'server-info',
@@ -20,10 +19,20 @@ module.exports = {
     ],
     
     callback: async (client, interaction) => {
-        const serverIp = await interaction.options.get('host-ip');
-        const serverPort = await interaction.options.get('host-port');
+        let serverIp = await interaction.options.get('host-ip');
+        let serverPort = await interaction.options.get('host-port');
 
-        serverUrl = `https://mcapi.us/server/status?ip=${serverIp.value}&port=${serverPort.value}`
+        let port = '';
+
+        if(!serverPort) {
+            port = '25565';
+        } else {
+            port = serverPort.value;
+        }
+        
+        console.log(port, 1);
+
+        serverUrl = `https://mcapi.us/server/status?ip=${serverIp.value}&port=${port}`
 
         let response = await fetch(serverUrl);
 
@@ -32,7 +41,7 @@ module.exports = {
             
             let replyEmbed = {
                 color: 0x26edb5,
-                title: `Сервер ${serverIp.value}:${serverPort.value}`,
+                title: `Сервер ${serverIp.value}:${port}`,
                 description: `Онлайн: **${data.players.now} из ${data.players.max}** чел.`,                    
             };
 
@@ -51,11 +60,12 @@ module.exports = {
 
             playerListField.replace('_', '\\_');
             Object.assign(replyEmbed, {fields: [{name: 'Список игроков:', value: playerListField}]});
-
+            
             interaction.reply({embeds: [replyEmbed]});
 
         } else {
             console.log("BRUUUUHTTP");
+            console.log(serverUrl); 
             interaction.reply('bruh');
         } 
     }
