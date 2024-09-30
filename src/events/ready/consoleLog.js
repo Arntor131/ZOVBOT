@@ -1,4 +1,4 @@
-const { Attachment, EmbedBuilder, AttachmentBuilder, ActivityType } = require('discord.js');
+const { Attachment, EmbedBuilder, AttachmentBuilder, ActivityType, ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder } = require('discord.js');
 const { description } = require('../../commands/moderation/ban');
 
 const file = new AttachmentBuilder('src/assets/img/zov.png');
@@ -25,6 +25,20 @@ const onReadyEmbed = {
 
 };
 
+const goida = new ButtonBuilder()
+    .setCustomId('testGoidaButton')
+    .setLabel('Гойда')
+    .setStyle(ButtonStyle.Danger);
+
+const gooal = new ButtonBuilder()
+
+    .setCustomId('testGoalButton')
+    .setLabel('Гооол')
+    .setStyle(ButtonStyle.Primary);
+
+const testButtonRow = new ActionRowBuilder()
+    .addComponents(goida, gooal);
+
 module.exports = async (client) => {
     console.log(`${client.user.tag} is online`);
 
@@ -38,13 +52,8 @@ module.exports = async (client) => {
         testUser.send("aboba");
     })
 
-    await client.users.fetch(process.env.VLAD_USER_ID)
-    .then(testUser => {
-        testUser.send("Vsem pohui");
-    })
-
     await client.channels.fetch(process.env.TEST_CHANNEL_ID)
     .then(channel => {
-        channel.send({embeds: [onReadyEmbed], files: [file]});
+        channel.send({embeds: [onReadyEmbed], files: [file], components: [testButtonRow]});
     });
 };

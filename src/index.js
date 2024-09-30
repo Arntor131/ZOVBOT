@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-//const http = require("http");
 const express = require('express');
 
 const { Client, IntentsBitField } = require("discord.js");
@@ -18,10 +17,6 @@ const client = new Client({
     ]
 });
 
-// const server = http.createServer((request, response) => {
-//     response.end("ZOVBot http works fine");
-// })
-
 const app = express();
 const urlencodedParser = express.urlencoded({extended: false});
 
@@ -35,6 +30,39 @@ app.get('/bruh', expressAsyncHandler( async (_, response) => {
     .then(channel => {
         channel.send('Негры пидарасы');
     });
+}));
+
+app.get('/message', expressAsyncHandler( async (request, response) => {
+    console.log(request.query.message);
+    console.log(request.originalUrl);
+    await client.channels.fetch(process.env.BRIDGE_CHANNEL_ID)
+    .then(channel => {
+        channel.send(`<${request.query.author}> ${request.query.message}`);
+        response.end('ok');
+    });
+}));
+
+// const confirm = new ButtonBuilder()
+//     .setCustomId('sessionConfirmButton')
+//     .setLabel('Подтвердить')
+//     .setStyle(ButtonStyle.Success);
+
+// const decline = new ButtonBuilder()
+
+//     .setCustomId('sessionDeclineButton')
+//     .setLabel('Отклонить')
+//     .setStyle(ButtonStyle.Secondary);
+// const buttonRow = new ActionRowBuilder()
+//     .addComponents(confirm, decline);
+
+app.get('/verify', expressAsyncHandler( async (request, response) => {
+    func = require('./httpHandlers/sendVerify');
+    func(request, response, client);
+}));
+
+app.get('/test', expressAsyncHandler(async(request, response) => {
+    console.log('received /test request from ');
+    response.end('ok');
 }));
 
 app.post("/", urlencodedParser, (request, response) => {
