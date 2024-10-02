@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 
-const { Client, IntentsBitField } = require("discord.js");
+const { Client, IntentsBitField, EmbedBuilder, bold } = require("discord.js");
 const eventHandler = require('./handlers/eventHandler');
 const expressAsyncHandler = require('express-async-handler');
 
@@ -33,11 +33,11 @@ app.get('/bruh', expressAsyncHandler( async (_, response) => {
 }));
 
 app.get('/message', expressAsyncHandler( async (request, response) => {
-    console.log(request.query.message);
-    console.log(request.originalUrl);
+    const message = request.query.author + ': ' + request.query.message;
+
     await client.channels.fetch(process.env.BRIDGE_CHANNEL_ID)
     .then(channel => {
-        channel.send(`<${request.query.author}> ${request.query.message}`);
+        channel.send(message);
         response.end('ok');
     });
 }));
