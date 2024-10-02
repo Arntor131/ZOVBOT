@@ -29,8 +29,6 @@ module.exports = {
         fetch(regURLstring)
         .then((response) => response.text())
         .then((text) => {
-            console.log(text);
-
             let embedTitle = '';
             let embedDescription = '';
             let embedColor = 0xFFFFFF;
@@ -72,6 +70,18 @@ module.exports = {
                 }
             }
 
+            interaction.reply({embeds: [embed]});
+        })
+        .catch((err) => {
+            const embed = {
+                color: 0xfc532d,
+                title: 'Ошибка регистрации',
+                description: 'Не удается связаться с сервером. Попробуйте позже.',
+                timestamp: new Date().toISOString(),
+                footer: {
+                    text: 'ZOVBOT by Arntor131',
+                }
+            }
             interaction.reply({embeds: [embed]});
         })
     }

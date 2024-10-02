@@ -42,23 +42,14 @@ app.get('/message', expressAsyncHandler( async (request, response) => {
     });
 }));
 
-// const confirm = new ButtonBuilder()
-//     .setCustomId('sessionConfirmButton')
-//     .setLabel('Подтвердить')
-//     .setStyle(ButtonStyle.Success);
-
-// const decline = new ButtonBuilder()
-
-//     .setCustomId('sessionDeclineButton')
-//     .setLabel('Отклонить')
-//     .setStyle(ButtonStyle.Secondary);
-// const buttonRow = new ActionRowBuilder()
-//     .addComponents(confirm, decline);
-
-app.get('/verify', expressAsyncHandler( async (request, response) => {
+app.get('/sendconfirmmessage', expressAsyncHandler( async (request, response) => {
     func = require('./httpHandlers/sendVerify');
     func(request, response, client);
 }));
+
+// app.get('/sendconfirmmessage', expressAsyncHandler(async (request, response) => {
+
+// }));
 
 app.get('/test', expressAsyncHandler(async(request, response) => {
     console.log('received /test request from ');

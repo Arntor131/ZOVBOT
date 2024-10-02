@@ -7,8 +7,9 @@ module.exports = async (client, interaction) => {
         console.log('bruh button');
         return;
     }
-
-    //console.log(interaction.message);
+    const discordid = interaction.user.id;
+    const verifyURL = `http://localhost:3203/confirmsession/?discordid=${discordid}`;
+    
     interaction.message.delete();
     interaction.reply('bruh');
 };

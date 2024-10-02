@@ -9,6 +9,9 @@ module.exports = async (client, message) => {
         messageURL = "http://localhost:8888/message/?author=" + message.author.globalName + "&message=" + message.content;
         console.log(messageURL);
 
-        fetch(messageURL);
+        fetch(messageURL)
+        .catch((err) => {
+            console.log('сообщение не было отправлено');
+        });
     }
 }
